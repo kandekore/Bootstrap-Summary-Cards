@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Bootstrap Summary Cards
  * Description: Display custom "Summary Cards" (intro/links) in a Bootstrap grid. Supports Custom Post Types, Categories, and Elementor.
- * Version: 1.0
+ * Version: 1.1
  * Author: D Kandekore
  */
 
@@ -210,6 +210,8 @@ function bsc_render_cards($category = '', $columns = 3, $limit = 12) {
     $args = [
         'post_type'      => 'summary_card',
         'posts_per_page' => intval($limit),
+        'orderby'        => 'menu_order',
+        'order'          => 'ASC',
         'tax_query'      => [],
     ];
 

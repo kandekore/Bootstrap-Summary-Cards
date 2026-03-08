@@ -1,7 +1,7 @@
 # Bootstrap Summary Cards
 
 **Description:** Create and display responsive "Summary Cards" or "Intro Blocks" that link to other internal or external pages.  
-**Version:** 1.0  
+**Version:** 1.1
 **Author:** D Kandekore  
 
 ## Features
@@ -47,3 +47,14 @@ Go to **Summary Cards > Display Settings** in the dashboard menu to change:
 * Border, Background, and Text colors.
 * Button Text (e.g., "Read More", "Go", "View").
 * Default Fallback Image.
+
+## Custom Post Order
+Cards can be reordered using the **Simple Custom Post Order** plugin. Drag cards into the desired order and the front-end display will reflect it.
+
+## Changelog
+
+### 1.1
+* Fixed: Cards now respect the custom order set by Simple Custom Post Order (and compatible plugins) by querying posts ordered by `menu_order ASC`.
+
+### 1.0
+* Initial release.
