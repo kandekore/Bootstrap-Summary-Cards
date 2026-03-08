@@ -1,7 +1,7 @@
 # Bootstrap Summary Cards
 
 **Description:** Create and display responsive "Summary Cards" — styled intro blocks that link to internal or external pages — using a Bootstrap grid layout.
-**Version:** 1.1
+**Version:** 1.2
 **Author:** D Kandekore
 **Requires:** WordPress 5.8+, PHP 7.4+
 **Optional:** Elementor (for widget support), Simple Custom Post Order (for drag-and-drop reordering)
@@ -23,7 +23,7 @@ This plugin is ideal for landing pages, service listings, resource directories, 
 - **Per-card Meta Fields** — Each card stores a Target URL (where clicking the card leads) and a Font Awesome icon class displayed on the image divider.
 - **Featured Image Support** — Cards display a featured image at the top. A global fallback image URL can be set for cards without one.
 - **Bootstrap 5 Grid** — Cards are rendered in a fully responsive Bootstrap 5 grid. The number of columns is configurable.
-- **Font Awesome Icons** — Icon support via Font Awesome 6. Specify any free icon class (e.g. `fa-solid fa-rocket`) per card.
+- **Font Awesome Icons** — Icon support via Font Awesome 6. Specify any icon class (e.g. `fa-solid fa-rocket`) per card. Supports both the free CDN and Font Awesome Pro via a kit URL.
 - **Global Design Settings** — Centralised admin panel to control border colour, background colour, text colour, button colour, divider colour, button label text, description character limit, and default fallback image.
 - **Shortcode** — Drop cards anywhere using `[bootstrap_summary_cards]` with optional parameters.
 - **Elementor Widget** — A native Elementor widget with point-and-click controls for category, columns, and card limit — no shortcode required.
@@ -125,13 +125,17 @@ Cards support drag-and-drop reordering via the **Simple Custom Post Order** plug
 The plugin loads the following external assets on pages where cards are displayed:
 
 - **Bootstrap 5.3.2 CSS** — `cdn.jsdelivr.net`
-- **Font Awesome 6.5.2 CSS** — `cdnjs.cloudflare.com`
+- **Font Awesome 6.5.2 CSS** — `cdnjs.cloudflare.com` (free CDN, used when no kit URL is set)
+- **Font Awesome Pro Kit** — loaded from your kit URL if one is set in Display Settings (replaces the free CDN)
 
 These are only enqueued when cards are actually rendered, not on every page.
 
 ---
 
 ## Changelog
+
+### 1.2
+- Added: Font Awesome Kit URL setting under Display Settings. Paste your Pro kit URL to load Font Awesome Pro instead of the free CDN, restoring access to premium icons.
 
 ### 1.1
 - Fixed: Cards now respect the custom order set by Simple Custom Post Order (and compatible plugins). The query now sorts by `menu_order ASC` instead of defaulting to date order.

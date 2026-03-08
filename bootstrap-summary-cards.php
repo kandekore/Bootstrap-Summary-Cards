@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Bootstrap Summary Cards
  * Description: Display custom "Summary Cards" (intro/links) in a Bootstrap grid. Supports Custom Post Types, Categories, and Elementor.
- * Version: 1.1
+ * Version: 1.2
  * Author: D Kandekore
  */
 
@@ -119,6 +119,7 @@ function bsc_register_settings() {
     register_setting('bsc_settings_group', 'bsc_default_image');
     register_setting('bsc_settings_group', 'bsc_button_color');
     register_setting('bsc_settings_group', 'bsc_text_color');
+    register_setting('bsc_settings_group', 'bsc_fa_kit_url');
 }
 
 function bsc_options_page() { ?>
@@ -161,6 +162,13 @@ function bsc_options_page() { ?>
                     <td>
                         <input type="text" name="bsc_default_image" value="<?php echo esc_attr(get_option('bsc_default_image', '')); ?>" style="width:80%;" placeholder="https://example.com/default.jpg" />
                         <p><em>Fallback image if no Featured Image is set.</em></p>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Font Awesome Kit URL</th>
+                    <td>
+                        <input type="url" name="bsc_fa_kit_url" value="<?php echo esc_attr(get_option('bsc_fa_kit_url', '')); ?>" style="width:80%;" placeholder="https://kit.fontawesome.com/XXXXXXXX.js" />
+                        <p><em>Paste your Font Awesome Kit URL here to use Pro icons. If left blank, the free Font Awesome CDN will be used instead. Find your kit URL at <a href="https://fontawesome.com/kits" target="_blank">fontawesome.com/kits</a>.</em></p>
                     </td>
                 </tr>
             </table>
@@ -230,7 +238,13 @@ function bsc_render_cards($category = '', $columns = 3, $limit = 12) {
 
     // Load Assets
     wp_enqueue_style('bsc-bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css', [], '5.3.2');
-    wp_enqueue_style('bsc-fontawesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css', [], '6.5.2');
+    $fa_kit_url = trim(get_option('bsc_fa_kit_url', ''));
+    if (!empty($fa_kit_url)) {
+        wp_enqueue_script('bsc-fontawesome-kit', esc_url($fa_kit_url), [], null, true);
+        wp_script_add_data('bsc-fontawesome-kit', 'crossorigin', 'anonymous');
+    } else {
+        wp_enqueue_style('bsc-fontawesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css', [], '6.5.2');
+    }
 
     // Calculate Column Class
     $col_class = 'col-md-' . (12 / max(1, intval($columns)));
